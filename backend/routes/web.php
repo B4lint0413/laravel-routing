@@ -3,6 +3,7 @@
 use App\Http\Controllers\SiteController;
 use App\Http\Controllers\QuoteController;
 use App\Http\Controllers\CalendarController;
+use App\Http\Controllers\CalculatorController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [SiteController::class, "index"])->name("quote.index");
@@ -14,3 +15,5 @@ Route::get('/idezetek/harry-potter/{slug}', [QuoteController::class, "harryPotte
 Route::get('/naptar/ma', [CalendarController::class, "today"])->name("calendar.today");
 Route::get('/naptar/tegnap', [CalendarController::class, "yesterday"])->name("calendar.yesterday");
 Route::get('/naptar/holnap', [CalendarController::class, "tomorrow"])->name("calendar.tomorrow");
+Route::get('/szamologep/{a}{operator}{b}', [CalculatorController::class, "result"])
+->whereNumber('a', 'b')->where('operator', '^[+\-*\/]{1}$')->name("calculator.result");
