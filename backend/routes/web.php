@@ -17,3 +17,7 @@ Route::get('/naptar/tegnap', [CalendarController::class, "yesterday"])->name("ca
 Route::get('/naptar/holnap', [CalendarController::class, "tomorrow"])->name("calendar.tomorrow");
 Route::get('/szamologep/{a}{operator}{b}', [CalculatorController::class, "result"])
 ->whereNumber('a', 'b')->where('operator', '^[+\-*\/]{1}$')->name("calculator.result");
+Route::get('/hetnapja/{number}', [CalendarController::class, "weekdayName"])
+->whereNumber('number')->name("weekday.name");
+Route::get('/hetnapja/{name}', [CalendarController::class, "weekdayNumber"])
+->where('name', '^[\w]+$')->name("weekday.number");

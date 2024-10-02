@@ -33,4 +33,22 @@ class CalendarController extends Controller
             "date" => $tomorrow->format("Y-M-D") 
         ]);
     }
+
+    protected $weekdays = ["hétfő", "kedd", "szerda", "csütörtök", "péntek", "szombat", "vasárnap"];
+
+    public function weekdayName($number){
+        if($number<1 || $number>7){
+            return "A hét napjához adja meg a sorszámát (1 és 7 közötti szám)";
+        }
+
+        return view("calendar.weekday", ["title"=>$this->weekdays[$number-1]]);
+    }
+
+    public function weekdayNumber($name){
+        if(!in_array($name, $this->weekdays)){
+            return "Ismeretlen nap!";
+        }
+
+        return view("calendar.weekday", ["title"=>(array_search($name, $this->weekdays)+1)]);
+    }
 }
